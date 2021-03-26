@@ -41,16 +41,29 @@ namespace XplatDesktopWeather
 
             var font = SystemFonts.CreateFont("Arial", 32, FontStyle.Regular);
 
+            var textOptions = new TextGraphicsOptions(
+                new GraphicsOptions() { Antialias = true, },
+                new TextOptions() { HorizontalAlignment = HorizontalAlignment.Center, });
+
+
+            var glyphs = TextBuilder.GenerateGlyphs(
+                $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
+                location: new PointF(x: 512, y: 64),
+                new RendererOptions(font)
+                {
+                    HorizontalAlignment = textOptions.TextOptions.HorizontalAlignment,
+                });
+
             i.Mutate(c =>
             {
-                c.DrawText(
-                    new TextGraphicsOptions(
-                        new GraphicsOptions() { Antialias = true, },
-                        new TextOptions() { HorizontalAlignment=HorizontalAlignment.Center, }),
-                    $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
-                    font,
-                    Color.Violet,
-                    new PointF(x: 512, y: 64));
+                c.Fill(Color.Violet, glyphs);
+
+                //c.DrawText(
+                //    textOptions,
+                //    $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
+                //    font,
+                //    Color.Violet,
+                //    new PointF(x: 512, y: 64));
             });
 
             return i;
