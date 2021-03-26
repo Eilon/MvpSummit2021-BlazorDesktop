@@ -1,5 +1,7 @@
 ﻿using AppKit;
 using Foundation;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace XplatDesktopWeather.macOS
 {
@@ -25,7 +27,11 @@ namespace XplatDesktopWeather.macOS
             NSApplication.SharedApplication.MainMenu = MakeMainMenu();
 
             Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            var additionalServices = new ServiceCollection();
+            additionalServices.AddSingleton<IDesktopWallpaperService, MacDesktopWallpaperService>();
+
+            LoadApplication(new App(additionalServices: additionalServices));
             base.DidFinishLaunching(notification);
         }
 
