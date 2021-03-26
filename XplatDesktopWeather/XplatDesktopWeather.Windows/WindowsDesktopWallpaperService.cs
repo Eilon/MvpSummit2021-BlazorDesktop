@@ -1,4 +1,4 @@
-﻿using ImageMagick;
+﻿using SixLabors.ImageSharp;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -9,12 +9,12 @@ namespace XplatDesktopWeather
 {
     public class WindowsDesktopWallpaperService : IDesktopWallpaperService
     {
-        public async Task SetWallpaper(MagickImage weatherImage)
+        public async Task SetWallpaper(Image weatherImage)
         {
             var picturesFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             var newDesktopImagePath = Path.Combine(picturesFolder, DateTimeOffset.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "-weatherpaper.png");
             using var imageStream = new FileStream(newDesktopImagePath, FileMode.Create);
-            await weatherImage.WriteAsync(imageStream, MagickFormat.Png);
+            await weatherImage.SaveAsPngAsync(imageStream);
 
             //var hr = SetBackgroud(newDesktopImagePath);
         }

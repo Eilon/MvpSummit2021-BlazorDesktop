@@ -1,4 +1,9 @@
-﻿using ImageMagick;
+﻿using SixLabors.Fonts;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing;
+using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -6,9 +11,14 @@ namespace XplatDesktopWeather
 {
     public class WeatherImageCreator
     {
-        public static async Task<MagickImage> CreateWeatherImage(WeatherForecast weatherForecast)
+        public static async Task<Image> CreateWeatherImage(WeatherForecast weatherForecast)
         {
-            var i = new MagickImage(MagickColors.Black, 1024, 768);
+            var i = new Image<Rgba32>(1024, 768);
+
+            i.Mutate(c =>
+            {
+                c.Fill(Color.Black);
+            });
 
             // Get weather icon
             var http = new HttpClient();
@@ -18,21 +28,30 @@ namespace XplatDesktopWeather
                 using var imageStream = await imageResponse.Content.ReadAsStreamAsync();
 
                 // Draw weather icon on image
-                var weatherIconImage = new MagickImage(imageStream);
-                weatherIconImage.Scale(new Percentage(400));
-                i.Composite(weatherIconImage, 512 - (weatherIconImage.Width / 2), 200);
+                var weatherIconImage = await Image.LoadAsync(imageStream);
+                weatherIconImage.Mutate(c =>
+                {
+                    c.Resize(weatherIconImage.Width * 4, weatherIconImage.Height * 4);
+                });
+                i.Mutate(c =>
+                {
+                    c.DrawImage(weatherIconImage, new Point(512 - (weatherIconImage.Width / 2), 200), opacity: 1f);
+                });
             }
 
-            new Drawables()
-              // Weather text caption
-              .FontPointSize(32)
-              .Font("Arial")
-              .StrokeColor(MagickColors.Violet)
-              .FillColor(MagickColors.White)
-              .TextAlignment(TextAlignment.Center)
-              .Text(x: 512, y: 64, $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F")
-              // Draw on image
-              .Draw(i);
+            var font = SystemFonts.CreateFont("Arial", 32, FontStyle.Regular);
+
+            i.Mutate(c =>
+            {
+                c.DrawText(
+                    new TextGraphicsOptions(
+                        new GraphicsOptions() { Antialias = true, },
+                        new TextOptions() { HorizontalAlignment=HorizontalAlignment.Center, }),
+                    $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
+                    font,
+                    Color.Violet,
+                    new PointF(x: 512, y: 64));
+            });
 
             return i;
         }

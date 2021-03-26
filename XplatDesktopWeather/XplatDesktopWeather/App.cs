@@ -19,7 +19,6 @@ namespace XplatDesktopWeather
                     services.AddBlazorHybrid();
 
                     // Register app-specific services
-                    //services.AddSingleton<IDesktopWallpaperService, DesktopWallpaperService>();
                     services.AddSingleton<IWeatherService, LocalWeatherService>();
 
                     if (additionalServices != null)

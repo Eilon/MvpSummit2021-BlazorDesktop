@@ -1,10 +1,10 @@
-﻿using ImageMagick;
+﻿using SixLabors.ImageSharp;
 using System.Threading.Tasks;
 
 namespace XplatDesktopWeather
 {
     public interface IDesktopWallpaperService
     {
-        Task SetWallpaper(MagickImage weatherImage);
+        Task SetWallpaper(Image weatherImage);
     }
 }
