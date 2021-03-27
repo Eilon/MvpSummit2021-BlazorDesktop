@@ -1,10 +1,8 @@
-﻿using SixLabors.ImageSharp;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
+using SixLabors.ImageSharp;
 
 namespace XplatDesktopWeather
 {

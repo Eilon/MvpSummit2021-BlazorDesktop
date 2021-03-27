@@ -46,34 +46,37 @@ namespace XplatDesktopWeather
                 });
             }
 
-            var font = SystemFonts.CreateFont("Arial", 32, FontStyle.Regular);
-
-            var textOptions = new TextGraphicsOptions(
-                new GraphicsOptions() { Antialias = true, },
-                new TextOptions() { HorizontalAlignment = HorizontalAlignment.Center, });
-
-
-            var glyphs = TextBuilder.GenerateGlyphs(
-                $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
-                location: new PointF(x: 512, y: 64),
-                new RendererOptions(font)
-                {
-                    HorizontalAlignment = textOptions.TextOptions.HorizontalAlignment,
-                });
-
-            i.Mutate(c =>
+            if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.WPF)
             {
-                c.Fill(new LinearGradientBrush(
-                    p1: new PointF(0, 0),
-                    p2: new PointF(100, 100),
-                    repetitionMode: GradientRepetitionMode.Reflect,
-                    colorStops: new[]
+                var font = SystemFonts.CreateFont("Arial", 32, FontStyle.Regular);
+
+                var textOptions = new TextGraphicsOptions(
+                    new GraphicsOptions() { Antialias = true, },
+                    new TextOptions() { HorizontalAlignment = HorizontalAlignment.Center, });
+
+
+                var glyphs = TextBuilder.GenerateGlyphs(
+                    $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
+                    location: new PointF(x: 512, y: 64),
+                    new RendererOptions(font)
                     {
+                        HorizontalAlignment = textOptions.TextOptions.HorizontalAlignment,
+                    });
+
+                i.Mutate(c =>
+                {
+                    c.Fill(new LinearGradientBrush(
+                        p1: new PointF(0, 0),
+                        p2: new PointF(100, 100),
+                        repetitionMode: GradientRepetitionMode.Reflect,
+                        colorStops: new[]
+                        {
                         new ColorStop(0f, Color.Violet),
                         new ColorStop(0.5f, Color.Blue),
                         new ColorStop(1f, Color.Orange),
-                    }), glyphs);
-            });
+                        }), glyphs);
+                });
+            }
 
             return i;
         }
