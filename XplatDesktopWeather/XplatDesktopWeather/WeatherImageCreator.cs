@@ -31,43 +31,49 @@ namespace XplatDesktopWeather
                 var weatherIconImage = await Image.LoadAsync(imageStream);
                 weatherIconImage.Mutate(c =>
                 {
-                    c.Resize(weatherIconImage.Width * 4, weatherIconImage.Height * 4);
+                    c.Resize(weatherIconImage.Width * 2, weatherIconImage.Height * 2);
                 });
                 i.Mutate(c =>
                 {
-                    c.DrawImage(weatherIconImage, new Point(512 - (weatherIconImage.Width / 2), 200), opacity: 1f);
-                });
-            }
-
-            if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.WPF)
-            {
-                var font = SystemFonts.CreateFont("Arial", 32, FontStyle.Regular);
-
-                var textOptions = new TextGraphicsOptions(
-                    new GraphicsOptions() { Antialias = true, },
-                    new TextOptions() { HorizontalAlignment = HorizontalAlignment.Center, });
-
-
-                var glyphs = TextBuilder.GenerateGlyphs(
-                    $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
-                    location: new PointF(x: 512, y: 64),
-                    new RendererOptions(font)
+                    var xGap = weatherIconImage.Width + 10;
+                    var yGap = weatherIconImage.Height / 2;
+                    for (int i = -3; i <= 3; i++)
                     {
-                        HorizontalAlignment = textOptions.TextOptions.HorizontalAlignment,
-                    });
-
-                i.Mutate(c =>
-                {
-                    c.Fill(Color.Violet, glyphs);
-
-                //c.DrawText(
-                //    textOptions,
-                //    $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
-                //    font,
-                //    Color.Violet,
-                //    new PointF(x: 512, y: 64));
+                        var leftOffset = 512 + i * xGap - (weatherIconImage.Width / 2);
+                        var topOffset = 400 + i * yGap;
+                        c.DrawImage(weatherIconImage, new Point(leftOffset, topOffset), opacity: 1f - ((3 - i) * 0.15f));
+                    }
                 });
             }
+
+            var font = SystemFonts.CreateFont("Arial", 32, FontStyle.Regular);
+
+            var textOptions = new TextGraphicsOptions(
+                new GraphicsOptions() { Antialias = true, },
+                new TextOptions() { HorizontalAlignment = HorizontalAlignment.Center, });
+
+
+            var glyphs = TextBuilder.GenerateGlyphs(
+                $"Conditions for {weatherForecast.Location}: {weatherForecast.WeatherText}, {weatherForecast.Temperature:0.0}°F",
+                location: new PointF(x: 512, y: 64),
+                new RendererOptions(font)
+                {
+                    HorizontalAlignment = textOptions.TextOptions.HorizontalAlignment,
+                });
+
+            i.Mutate(c =>
+            {
+                c.Fill(new LinearGradientBrush(
+                    p1: new PointF(0, 0),
+                    p2: new PointF(100, 100),
+                    repetitionMode: GradientRepetitionMode.Reflect,
+                    colorStops: new[]
+                    {
+                        new ColorStop(0f, Color.Violet),
+                        new ColorStop(0.5f, Color.Blue),
+                        new ColorStop(1f, Color.Orange),
+                    }), glyphs);
+            });
 
             return i;
         }
