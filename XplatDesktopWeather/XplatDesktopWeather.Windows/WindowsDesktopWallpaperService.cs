@@ -16,7 +16,7 @@ namespace XplatDesktopWeather
             using var imageStream = new FileStream(newDesktopImagePath, FileMode.Create);
             await weatherImage.SaveAsPngAsync(imageStream);
 
-            //var hr = SetBackgroud(newDesktopImagePath);
+            var hr = SetBackgroud(newDesktopImagePath);
         }
 
         private static int SetBackgroud(string fileName)

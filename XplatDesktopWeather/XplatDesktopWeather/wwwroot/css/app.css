@@ -18,6 +18,9 @@ html, body {
 
 a, .btn-link {
     color: #0366d6;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
 }
 
 .btn-primary {
@@ -364,14 +367,14 @@ html, body {
     }
 }
 
-.btn-link {
+/*.btn-link {
     background: transparent;
     border: 1px solid #fff;
     padding: 12px;
-    font-size: 15px;
-    /*optional*/
-    /*input has OS specific font-family*/
-    border-radius: 1rem;
+    font-size: 15px;*/
+    /*optional
+    input has OS specific font-family*/
+    /*border-radius: 1rem;
     border-bottom-right-radius: 0;
     text-decoration: none;
     cursor: pointer;
@@ -382,7 +385,7 @@ html, body {
     .btn-link.selected {
         background: linear-gradient(-45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.35));
         font-weight: bold;
-    }
+    }*/
 
 .image-predictor {
     margin-top: 20px;
