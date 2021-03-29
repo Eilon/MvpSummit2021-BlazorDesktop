@@ -18,7 +18,7 @@ namespace BlazorDesktopWeather
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddBlazorWebView();
-            serviceCollection.AddSingleton<IDesktopWallpaperService, DesktopWallpaperService>();
+            //serviceCollection.AddSingleton<IDesktopWallpaperService, DesktopWallpaperService>();
             serviceCollection.AddSingleton<IWeatherService>(_weatherService);
 
             InitializeComponent();
@@ -37,31 +37,27 @@ namespace BlazorDesktopWeather
 
         private async void PollWeather()
         {
-            var weather = await _weatherService.GetWeatherAsync(location: "wherever");
-            UpdateForm(weather);
-
-            //var client = new WeatherClient(GrpcChannel.ForAddress(serviceUrl));
-            //var weatherService = new GrpcWeatherForecastService(client);
-
-            //await foreach (var message in weatherService.GetStreamingWeather(cts.Token))
-            //{
-            //    UpdateForm(message);
-            //};
+            while (true)
+            {
+                var weather = await _weatherService.GetWeatherAsync(location: "Seattle");
+                UpdateForm(weather);
+                await Task.Delay(5000);
+            }
         }
 
-        private void UpdateForm(WeatherResponse weatherResponse)
+        private void UpdateForm(WeatherForecast weatherResponse)
         {
             Invoke((Action)(() =>
             {
                 City.Text = weatherResponse.Location;
-                WeatherIcon.Load(weatherResponse.WeartherUri);
-                Temperature.Text = (weatherResponse.Temperature == -432) ? "9K" : weatherResponse.Temperature.ToString();
+                WeatherIcon.Load(weatherResponse.WeatherUri);
+                Temperature.Text = weatherResponse.Temperature.ToString();
                 WeatherText.Text = weatherResponse.WeatherText;
                 //Pressure.Text = $"{weatherResponse.Pressure.ToString()} in";
                 //Wind.Text = $"{weatherResponse.WindSpeed.ToString()} mph";
                 //Humidity.Text = $"{weatherResponse.RelativeHumidity.ToString()} %";
                 //UVIndex.Text = weatherResponse.UVIndex.ToString();
-                var localTime = weatherResponse.RetrievedDateTimeOffset.ToLocalTime();
+                var localTime = weatherResponse.RetrievedTime.ToLocalTime();
                 Updated.Text = $"Updated at {localTime.ToString("h:mm:ss tt")}";
             }));
         }

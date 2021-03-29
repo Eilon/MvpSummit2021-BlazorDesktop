@@ -4,6 +4,6 @@ namespace BlazorDesktopWeather
 {
     public interface IWeatherService
     {
-        Task<WeatherResponse> GetWeatherAsync(string location);
+        Task<WeatherForecast> GetWeatherAsync(string location);
     }
 }

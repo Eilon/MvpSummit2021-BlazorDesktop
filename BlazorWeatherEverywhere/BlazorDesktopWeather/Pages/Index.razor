@@ -1,6 +1,7 @@
 ﻿@page "/"
-@inject IEnumerable<IDesktopWallpaperService> DesktopWallpaperService
+@*@inject IEnumerable<IDesktopWallpaperService> DesktopWallpaperService*@
 @inject IWeatherService WeatherService
+@using WebAssemblyMan
 
 @if (currentWeather == null)
 {
@@ -10,18 +11,21 @@ else
 {
     <div id="main" class="@GetBackgroundClass()">
         <div class="weather-now">
-            <h1>SEATTLE</h1>
-            @if (DesktopWallpaperService.Any())
-            {
+            <LineChart InputSeries1="44,56,52,51,55,48,47"
+                   XAxisLabels="M,T,W,T,F,S,S"
+                   InputLabels="Temp(F)"> </LineChart>
+
+            @*            @if (DesktopWallpaperService.Any())
+                {
                 <button @onclick="SetWallpaper">Set wallpaper</button>
-            }
-            <div class="location-img"></div>
+                }
+            *@
             <div class="temperature">
                 @GetTemperature()
                 <TemperatureUnitPicker @bind-TemperatureUnit="temperatureUnit" />
             </div>
             <div class="summary">
-                <img class="weather-img" src="@currentWeather.WeartherUri" alt="@currentWeather.WeatherText" />
+                <img class="weather-img" src="@currentWeather.WeatherUri" alt="@currentWeather.WeatherText" />
                 @currentWeather.WeatherText
             </div>
             <div class="update-info">Updated @GetTimeToDisplay()</div>
@@ -36,18 +40,18 @@ else
 }
 
 @code {
-    async Task SetWallpaper()
-    {
+    @*    async Task SetWallpaper()
+        {
         await DesktopWallpaperService.First().SetWallpaper(currentWeather);
-    }
+        }
+    *@
+    WeatherForecast currentWeather;
 
-    WeatherResponse currentWeather;
-    
     string temperatureUnit = "F";
 
     protected override async Task OnInitializedAsync()
     {
-        currentWeather = await WeatherService.GetWeatherAsync(location: "somewhere");
+        currentWeather = await WeatherService.GetWeatherAsync(location: "seattle");
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -60,11 +64,12 @@ else
 
     async Task GetWeatherUpdates()
     {
-        //await foreach (var weatherResponse in WeatherForecastService.GetStreamingWeather(streamingWeatherCTS.Token))
-        //{
-        //    currentWeather = weatherResponse;
-        //    StateHasChanged();
-        //}
+        while (true)
+        {
+            currentWeather = await WeatherService.GetWeatherAsync(location: "seattle");
+            StateHasChanged();
+            await Task.Delay(5000);
+        }
     }
 
     string GetBackgroundClass()
@@ -99,5 +104,5 @@ else
         => (float)Math.Round((f - 23f) / 1.8f);
 
     string GetTimeToDisplay()
-        => "recently";// currentWeather.RetrievedTime.ToDateTimeOffset().ToLocalTime().ToString("T");
+        => currentWeather.RetrievedTime.ToLocalTime().ToString("T");
 }

@@ -82,12 +82,14 @@ namespace BlazorDesktopWeather
             // 
             // Updated
             // 
+            this.Updated.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Updated.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Updated.ForeColor = System.Drawing.Color.SpringGreen;
-            this.Updated.Location = new System.Drawing.Point(35, 572);
+            this.Updated.Location = new System.Drawing.Point(0, 602);
             this.Updated.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.Updated.Name = "Updated";
-            this.Updated.Size = new System.Drawing.Size(711, 84);
+            this.Updated.Size = new System.Drawing.Size(773, 84);
             this.Updated.TabIndex = 11;
             this.Updated.Text = "Updated at 12:36:11 AM";
             this.Updated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -107,14 +109,15 @@ namespace BlazorDesktopWeather
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(54)))), ((int)(((byte)(170)))));
-            this.label1.Location = new System.Drawing.Point(-20, 686);
+            this.label1.Location = new System.Drawing.Point(0, 686);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(823, 93);
+            this.label1.Size = new System.Drawing.Size(773, 93);
             this.label1.TabIndex = 13;
             this.label1.Text = "Powered by .NET with 💜";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -133,9 +136,12 @@ namespace BlazorDesktopWeather
             // 
             // WeatherDetailsBlazorWebView
             // 
-            this.WeatherDetailsBlazorWebView.Location = new System.Drawing.Point(12, 158);
+            this.WeatherDetailsBlazorWebView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WeatherDetailsBlazorWebView.Location = new System.Drawing.Point(26, 139);
             this.WeatherDetailsBlazorWebView.Name = "WeatherDetailsBlazorWebView";
-            this.WeatherDetailsBlazorWebView.Size = new System.Drawing.Size(748, 411);
+            this.WeatherDetailsBlazorWebView.Size = new System.Drawing.Size(732, 444);
             this.WeatherDetailsBlazorWebView.TabIndex = 20;
             // 
             // WeatherForm
@@ -143,7 +149,7 @@ namespace BlazorDesktopWeather
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(68)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(786, 778);
+            this.ClientSize = new System.Drawing.Size(770, 778);
             this.Controls.Add(this.WeatherDetailsBlazorWebView);
             this.Controls.Add(this.WeatherIcon);
             this.Controls.Add(this.WeatherText);

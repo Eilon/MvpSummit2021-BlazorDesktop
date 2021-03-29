@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31115.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDesktopWeather", "BlazorDesktopWeather\BlazorDesktopWeather.csproj", "{C95C0977-E075-4F40-B35E-2705DDC15C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDesktopWeather", "BlazorDesktopWeather\BlazorDesktopWeather.csproj", "{C95C0977-E075-4F40-B35E-2705DDC15C19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineChart", "LineChart\LineChart.csproj", "{180A0671-CF2B-4129-A82F-52BAE3E57EDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C95C0977-E075-4F40-B35E-2705DDC15C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C95C0977-E075-4F40-B35E-2705DDC15C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C95C0977-E075-4F40-B35E-2705DDC15C19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{180A0671-CF2B-4129-A82F-52BAE3E57EDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{180A0671-CF2B-4129-A82F-52BAE3E57EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{180A0671-CF2B-4129-A82F-52BAE3E57EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{180A0671-CF2B-4129-A82F-52BAE3E57EDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
