@@ -11,10 +11,6 @@ else
 {
     <div id="main" class="@GetBackgroundClass()">
         <div class="weather-now">
-            <LineChart InputSeries1="44,56,52,51,55,48,47"
-                   XAxisLabels="M,T,W,T,F,S,S"
-                   InputLabels="Temp(F)"> </LineChart>
-
             @*            @if (DesktopWallpaperService.Any())
                 {
                 <button @onclick="SetWallpaper">Set wallpaper</button>
@@ -35,6 +31,10 @@ else
                 <div>Humidity <p>@currentWeather.RelativeHumidity%</p></div>
                 <div>Wind <p>@currentWeather.WindSpeed <span class="wind-details">mph @currentWeather.WindDirection</span></p></div>
             </div>
+
+            <LineChart InputSeries1="@RandomTemps"
+                   XAxisLabels="M,T,W,T,F,S,S"
+                   InputLabels="Temp(F)"> </LineChart>
         </div>
     </div>
 }
@@ -46,6 +46,10 @@ else
         }
     *@
     WeatherForecast currentWeather;
+
+
+    Random _random = new Random();
+    string RandomTemps => string.Join(",", Enumerable.Range(0, 7).Select(_ => _random.Next(40, 60)));
 
     string temperatureUnit = "F";
 
