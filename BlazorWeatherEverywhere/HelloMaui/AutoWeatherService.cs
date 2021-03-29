@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using WeatherLib;
 
-namespace HelloMaui
+namespace BlazorMobileWeather
 {
     public class AutoWeatherService : IWeatherService
     {

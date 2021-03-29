@@ -4,7 +4,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Hosting;
 
-namespace HelloMaui
+namespace BlazorMobileWeather
 {
 	public class Application : MauiApp
 	{

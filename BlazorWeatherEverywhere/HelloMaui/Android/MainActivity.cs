@@ -2,7 +2,7 @@
 using Android.OS;
 using Microsoft.Maui;
 
-namespace HelloMaui
+namespace BlazorMobileWeather
 {
 	[Activity(Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
 	public class MainActivity : MauiAppCompatActivity

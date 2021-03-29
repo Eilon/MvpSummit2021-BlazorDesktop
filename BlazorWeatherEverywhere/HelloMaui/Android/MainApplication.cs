@@ -3,7 +3,7 @@ using Android.App;
 using Android.Runtime;
 using Microsoft.Maui;
 
-namespace HelloMaui
+namespace BlazorMobileWeather
 {
 	[Application]
 	public class MainApplication : MauiApplication<Application>

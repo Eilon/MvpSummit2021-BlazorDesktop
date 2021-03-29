@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineChart", "LineChart\Line
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMauiWebView", "BlazorMauiWebView\BlazorMauiWebView.csproj", "{42C035E6-22B7-482B-8413-0FA30860CB9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloMaui", "HelloMaui\HelloMaui.csproj", "{B4B84FF4-7A3C-4F76-895E-1C7E96086D8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMobileWeather", "HelloMaui\BlazorMobileWeather.csproj", "{B4B84FF4-7A3C-4F76-895E-1C7E96086D8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherDisplay", "WeatherDisplay\WeatherDisplay.csproj", "{3775B7EA-3524-4E99-8E73-CAD604048F6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherDisplay", "WeatherDisplay\WeatherDisplay.csproj", "{3775B7EA-3524-4E99-8E73-CAD604048F6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherLib", "WeatherLib\WeatherLib.csproj", "{2115523B-4441-42C2-A425-5B18E70E7752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherLib", "WeatherLib\WeatherLib.csproj", "{2115523B-4441-42C2-A425-5B18E70E7752}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

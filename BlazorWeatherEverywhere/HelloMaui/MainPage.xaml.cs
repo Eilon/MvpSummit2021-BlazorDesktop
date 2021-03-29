@@ -5,7 +5,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
 using WeatherLib;
 
-namespace HelloMaui
+namespace BlazorMobileWeather
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage, IPage

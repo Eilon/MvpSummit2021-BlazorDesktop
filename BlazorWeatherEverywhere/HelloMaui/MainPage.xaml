@@ -2,9 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 
 xmlns:blazor="clr-namespace:BlazorMauiWebView;assembly=BlazorMauiWebView"
-        xmlns:local="clr-namespace:HelloMaui"
+        xmlns:local="clr-namespace:BlazorMobileWeather"
 
-             x:Class="HelloMaui.MainPage"
+             x:Class="BlazorMobileWeather.MainPage"
              BackgroundColor="White">
 
     <ScrollView>

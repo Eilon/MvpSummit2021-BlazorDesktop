@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui;
 
-namespace HelloMaui
+namespace BlazorMobileWeather
 {
 	public class MainWindow : IWindow
 	{
