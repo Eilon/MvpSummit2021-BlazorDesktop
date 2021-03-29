@@ -151,7 +151,6 @@ namespace BlazorDesktopWeather
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(68)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(770, 778);
-            this.Controls.Add(this.WeatherDetailsBlazorWebView);
             this.Controls.Add(this.WeatherIcon);
             this.Controls.Add(this.WeatherText);
             this.Controls.Add(this.City);
@@ -159,6 +158,7 @@ namespace BlazorDesktopWeather
             this.Controls.Add(this.Updated);
             this.Controls.Add(this.GradLabel);
             this.Controls.Add(this.Temperature);
+            this.Controls.Add(this.WeatherDetailsBlazorWebView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.MaximizeBox = false;
