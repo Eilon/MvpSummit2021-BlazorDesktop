@@ -143,6 +143,7 @@ namespace BlazorDesktopWeather
             this.WeatherDetailsBlazorWebView.Name = "WeatherDetailsBlazorWebView";
             this.WeatherDetailsBlazorWebView.Size = new System.Drawing.Size(732, 444);
             this.WeatherDetailsBlazorWebView.TabIndex = 20;
+            this.WeatherDetailsBlazorWebView.Visible = false;
             // 
             // WeatherForm
             // 
