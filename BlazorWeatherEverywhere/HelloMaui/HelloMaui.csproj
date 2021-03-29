@@ -3,7 +3,7 @@
     <TargetFrameworks>net6.0-android</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <SingleProject>true</SingleProject>
-    <ApplicationId>com.microsoft.hellomaui</ApplicationId>
+    <ApplicationId>com.microsoft.hellomauiweather</ApplicationId>
     <ApplicationTitle>MAUI</ApplicationTitle>
     <ApplicationVersion>1.0</ApplicationVersion>
     <AndroidVersionCode>1</AndroidVersionCode>
@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.JSInterop" Version="6.0.0-preview.4.21179.6" />
     <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.2.174" />
     <PackageReference Include="Microsoft.Maui.Core" Version="6.0.100-preview.2.174" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
 
   </ItemGroup>
   <ItemGroup>
@@ -33,5 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlazorMauiWebView\BlazorMauiWebView.csproj" />
+    <ProjectReference Include="..\WeatherDisplay\WeatherDisplay.csproj" />
+    <ProjectReference Include="..\WeatherLib\WeatherLib.csproj" />
   </ItemGroup>
 </Project>

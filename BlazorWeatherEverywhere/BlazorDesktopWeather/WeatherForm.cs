@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.Components.WebView.WindowsForms;
+using WeatherLib;
 
 namespace BlazorDesktopWeather
 {
@@ -18,7 +19,6 @@ namespace BlazorDesktopWeather
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddBlazorWebView();
-            //serviceCollection.AddSingleton<IDesktopWallpaperService, DesktopWallpaperService>();
             serviceCollection.AddSingleton<IWeatherService>(_weatherService);
 
             InitializeComponent();

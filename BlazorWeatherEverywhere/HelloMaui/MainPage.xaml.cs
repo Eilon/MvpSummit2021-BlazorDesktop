@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
+using WeatherLib;
 
 namespace HelloMaui
 {
@@ -16,6 +17,7 @@ namespace HelloMaui
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddBlazorWebView();
             serviceCollection.AddSingleton<AppState>(_appState);
+            serviceCollection.AddSingleton<IWeatherService, AutoWeatherService>();
             Resources.Add("services", serviceCollection.BuildServiceProvider());
 
             InitializeComponent();

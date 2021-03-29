@@ -15,7 +15,7 @@ xmlns:blazor="clr-namespace:BlazorMauiWebView;assembly=BlazorMauiWebView"
                 TextColor="Black" 
                 HorizontalOptions="CenterAndExpand" />
 
-          <blazor:BlazorMauiWebView x:Name="blazorWebView1" HeightRequest="200" HostPage="wwwroot/index.html" Services="{StaticResource services}">
+          <blazor:BlazorMauiWebView x:Name="blazorWebView1" HeightRequest="500" HostPage="wwwroot/index.html" Services="{StaticResource services}">
             <blazor:BlazorMauiWebView.RootComponents>
               <blazor:RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
             </blazor:BlazorMauiWebView.RootComponents>

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LineChart\LineChart.csproj" />
+    <ProjectReference Include="..\WeatherDisplay\WeatherDisplay.csproj" />
   </ItemGroup>
 
   <ItemGroup>

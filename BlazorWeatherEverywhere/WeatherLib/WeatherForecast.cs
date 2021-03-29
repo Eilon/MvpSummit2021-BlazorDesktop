@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlazorDesktopWeather
+namespace WeatherLib
 {
     public class WeatherForecast
     {

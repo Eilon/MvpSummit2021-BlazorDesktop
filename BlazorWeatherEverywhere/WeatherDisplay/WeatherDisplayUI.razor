@@ -1,0 +1,69 @@
+﻿@page "/"
+
+<div id="main" class="@GetBackgroundClass()">
+    <div class="weather-now">
+        <h1>@Weather.Location</h1>
+        <div class="temperature">
+            @GetTemperature()
+            <TemperatureUnitPicker @bind-TemperatureUnit="temperatureUnit" />
+        </div>
+        <div class="summary">
+            <img class="weather-img" src="@Weather.WeatherUri" alt="@Weather.WeatherText" />
+            @Weather.WeatherText
+        </div>
+        <div class="update-info">Updated @GetTimeToDisplay()</div>
+        <div class="metrics">
+            <div>UV index <p>@Weather.UVIndex</p></div>
+            <div>Barometer <p>@Weather.Pressure</p></div>
+            <div>Humidity <p>@Weather.RelativeHumidity%</p></div>
+            <div>Wind <p>@Weather.WindSpeed <span class="wind-details">mph @Weather.WindDirection</span></p></div>
+        </div>
+
+        <LineChart InputSeries1="@RandomTemps"
+                XAxisLabels="M,T,W,T,F,S,S"
+                InputLabels="Temp(F)"> </LineChart>
+    </div>
+</div>
+
+@code {
+    [Parameter] public WeatherForecast Weather { get; set; }
+
+    Random _random = new Random();
+    string RandomTemps => string.Join(",", Enumerable.Range(0, 7).Select(_ => _random.Next(40, 60)));
+
+    string temperatureUnit = "F";
+
+    string GetBackgroundClass()
+    {
+        if (Weather == null)
+        {
+            return string.Empty;
+        }
+        else if (!Weather.IsDayTime)
+        {
+            return "night";
+        }
+        else if (Weather.Temperature > 60)
+        {
+            return "warm";
+        }
+        else
+        {
+            return "cold";
+        }
+    }
+
+    void SwitchTemperatureUnit()
+    {
+        temperatureUnit = temperatureUnit == "F" ? "C" : "F";
+    }
+
+    float GetTemperature()
+        => temperatureUnit == "F" ? Weather.Temperature : TemperatureAsCelsius(Weather.Temperature);
+
+    float TemperatureAsCelsius(float f)
+        => (float)Math.Round((f - 23f) / 1.8f);
+
+    string GetTimeToDisplay()
+        => Weather.RetrievedTime.ToLocalTime().ToString("T");
+}

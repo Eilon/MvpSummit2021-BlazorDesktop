@@ -1,22 +1,40 @@
 ﻿@page "/"
+@inject IWeatherService WeatherService
 
-@inject AppState AppState
-
-<h3>Hello, world!</h3>
-
-<p>The current count is <strong>@AppState.Counter</strong></p>
-
-<button @onclick="IncrementCount">Increment</button>
-<button @onclick="TriggerException">Throw</button>
+@if (currentWeather == null)
+{
+    <p class="loading"><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <WeatherDisplayUI Weather="@currentWeather" />
+    </div>
+}
 
 @code {
-    void IncrementCount()
+    WeatherForecast currentWeather;
+
+    protected override async Task OnInitializedAsync()
     {
-        AppState.Counter++;
+        currentWeather = await WeatherService.GetWeatherAsync(null);
     }
 
-    void TriggerException()
+    protected override void OnAfterRender(bool firstRender)
     {
-        throw new InvalidTimeZoneException("This is an exception from an event handler");
+        if (firstRender)
+        {
+            _ = GetWeatherUpdates();
+        }
+    }
+
+    async Task GetWeatherUpdates()
+    {
+        while (true)
+        {
+            currentWeather = await WeatherService.GetWeatherAsync(null);
+            StateHasChanged();
+            await Task.Delay(5000);
+        }
     }
 }

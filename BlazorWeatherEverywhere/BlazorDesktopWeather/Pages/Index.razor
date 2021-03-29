@@ -1,7 +1,5 @@
 ﻿@page "/"
-@*@inject IEnumerable<IDesktopWallpaperService> DesktopWallpaperService*@
 @inject IWeatherService WeatherService
-@using WebAssemblyMan
 
 @if (currentWeather == null)
 {
@@ -9,53 +7,22 @@
 }
 else
 {
-    <div id="main" class="@GetBackgroundClass()">
-        <div class="weather-now">
-            @*            @if (DesktopWallpaperService.Any())
-                {
-                <button @onclick="SetWallpaper">Set wallpaper</button>
-                }
-            *@
-            <div class="temperature">
-                @GetTemperature()
-                <TemperatureUnitPicker @bind-TemperatureUnit="temperatureUnit" />
-            </div>
-            <div class="summary">
-                <img class="weather-img" src="@currentWeather.WeatherUri" alt="@currentWeather.WeatherText" />
-                @currentWeather.WeatherText
-            </div>
-            <div class="update-info">Updated @GetTimeToDisplay()</div>
-            <div class="metrics">
-                <div>UV index <p>@currentWeather.UVIndex</p></div>
-                <div>Barometer <p>@currentWeather.Pressure</p></div>
-                <div>Humidity <p>@currentWeather.RelativeHumidity%</p></div>
-                <div>Wind <p>@currentWeather.WindSpeed <span class="wind-details">mph @currentWeather.WindDirection</span></p></div>
-            </div>
-
-            <LineChart InputSeries1="@RandomTemps"
-                   XAxisLabels="M,T,W,T,F,S,S"
-                   InputLabels="Temp(F)"> </LineChart>
+    <div>
+@*        <div style="font-size:72px;color:black;font-font-synthesis-weight:400">
+            Temp is: @currentWeather.Temperature
         </div>
+*@        <WeatherDisplayUI Weather="@currentWeather" />
     </div>
 }
 
 @code {
-    @*    async Task SetWallpaper()
-        {
-        await DesktopWallpaperService.First().SetWallpaper(currentWeather);
-        }
-    *@
     WeatherForecast currentWeather;
 
-
-    Random _random = new Random();
-    string RandomTemps => string.Join(",", Enumerable.Range(0, 7).Select(_ => _random.Next(40, 60)));
-
-    string temperatureUnit = "F";
+    string location = "Seattle";
 
     protected override async Task OnInitializedAsync()
     {
-        currentWeather = await WeatherService.GetWeatherAsync(location: "seattle");
+        currentWeather = await WeatherService.GetWeatherAsync(location);
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -70,43 +37,9 @@ else
     {
         while (true)
         {
-            currentWeather = await WeatherService.GetWeatherAsync(location: "seattle");
+            currentWeather = await WeatherService.GetWeatherAsync(location);
             StateHasChanged();
             await Task.Delay(5000);
         }
     }
-
-    string GetBackgroundClass()
-    {
-        if (currentWeather == null)
-        {
-            return string.Empty;
-        }
-        else if (!currentWeather.IsDayTime)
-        {
-            return "night";
-        }
-        else if (currentWeather.Temperature > 60)
-        {
-            return "warm";
-        }
-        else
-        {
-            return "cold";
-        }
-    }
-
-    void SwitchTemperatureUnit()
-    {
-        temperatureUnit = temperatureUnit == "F" ? "C" : "F";
-    }
-
-    float GetTemperature()
-        => temperatureUnit == "F" ? currentWeather.Temperature : TemperatureAsCelsius(currentWeather.Temperature);
-
-    float TemperatureAsCelsius(float f)
-        => (float)Math.Round((f - 23f) / 1.8f);
-
-    string GetTimeToDisplay()
-        => currentWeather.RetrievedTime.ToLocalTime().ToString("T");
 }
